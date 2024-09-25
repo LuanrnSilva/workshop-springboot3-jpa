@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,16 +18,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "tb_user")
-public class User implements Serializable{
+public class User implements Serializable {
 
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,9 +33,10 @@ public class User implements Serializable{
     private String email;
     private String phone;
     private String password;
-    
+
+    @JsonIgnore
     @Setter(AccessLevel.NONE)
-    @OneToMany(mappedBy= "client")
+    @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 
     public User(Long id, String name, String email, String phone, String password) {
