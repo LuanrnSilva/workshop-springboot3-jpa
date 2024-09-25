@@ -10,12 +10,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @Getter
+@Setter
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Entity
@@ -31,7 +34,7 @@ public class User implements Serializable{
     private String phone;
     private String password;
     
-    @Getter
+    @Setter(AccessLevel.NONE)
     @OneToMany(mappedBy= "client")
     private List<Order> orders = new ArrayList<>();
 
